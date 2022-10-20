@@ -1,8 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
+import './style.css';
+
+import Movies from './components/Movies';
+
 function App() {
-  return <h1>Hello</h1>;
+  return <Movies />;
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
