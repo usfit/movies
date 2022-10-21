@@ -9,7 +9,7 @@ class Movies extends Component {
   state = {
     title: 'КРОВАВАЯ РЕЗЬНЯ',
     date: '05.05.1995',
-    description: 'Разрови ебальник',
+    description: 'Разрови ебальник. Надо написать длинный текст, но я не знаю, что писать, поэтому пишу эту херню.',
     image: 'https://image.tmdb.org/t/p/original/zldQJ1EhIc7G79cYyXrzQQzUl7a.jpg',
   };
 

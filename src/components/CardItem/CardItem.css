@@ -3,3 +3,11 @@
   height: 281px;
   border: 1px black solid;
 }
+
+.CardItem__Image {
+  background: none;
+}
+
+.ant-card-body {
+  padding: 0;
+}
