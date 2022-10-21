@@ -16,9 +16,11 @@ function CardList({ title, date, description, image }) {
   }
 
   return (
-    <Row className="CardList" gutter={[36, 35]} justify="center">
-      {components}
-    </Row>
+    <div className="CardList">
+      <Row gutter={[36, 35]} justify="center">
+        {components}
+      </Row>
+    </div>
   );
 }
 

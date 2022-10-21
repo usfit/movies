@@ -1,4 +1,5 @@
 .CardList {
   max-width: 1110px;
-  border: 1px black solid;
+  border: 1px red solid;
+  padding: 20px 40px 70px 40px;
 }
