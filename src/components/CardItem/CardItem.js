@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Image, Layout, Typography } from 'antd';
+import { Card, Image, Layout, Typography, Tag } from 'antd';
 
 import './CardItem.css';
 
@@ -14,9 +14,13 @@ function CardItem({ ind, title, date, description, image }) {
           <Image src={image} />
         </Sider>
         <Layout>
-          <Content>
+          <Content className="CardItem__Content">
             <Title>{`${title} ${ind}`}</Title>
             <p>{date}</p>
+            <div>
+              <Tag color="default">Action</Tag>
+              <Tag color="default">Drama</Tag>
+            </div>
             <p>{description}</p>
           </Content>
         </Layout>

@@ -8,6 +8,22 @@
   background: none;
 }
 
+.ant-layout {
+  background: none;
+}
+
 .ant-card-body {
   padding: 0;
+}
+
+h1.ant-typography {
+  font-family: 'Inter';
+  font-style: normal;
+  font-size: 20px;
+  line-height: 20px;
+  font-weight: 400;
+}
+
+.CardItem__Content {
+  padding: 12px 20px 49px;
 }

@@ -7,9 +7,10 @@ class Movies extends Component {
   // movieRequest = new MovieServise();
 
   state = {
-    title: 'КРОВАВАЯ РЕЗЬНЯ',
+    title: 'The way back',
     date: '05.05.1995',
-    description: 'Разрови ебальник. Надо написать длинный текст, но я не знаю, что писать, поэтому пишу эту херню.',
+    description:
+      'A former basketball all-star, who has lost his wife and family foundation in a struggle with addiction attempts to regain his soul  and salvation by becoming the coach of a disparate ethnically mixed high ...',
     image: 'https://image.tmdb.org/t/p/original/zldQJ1EhIc7G79cYyXrzQQzUl7a.jpg',
   };
 
