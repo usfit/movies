@@ -1,10 +1,10 @@
 .CardItem {
   width: 454px;
   height: 281px;
-  border: 1px black solid;
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
 }
 
-.CardItem__Image {
+.CardItem__image {
   background: none;
 }
 
@@ -17,13 +17,36 @@
 }
 
 h1.ant-typography {
-  font-family: 'Inter';
   font-style: normal;
   font-size: 20px;
   line-height: 20px;
   font-weight: 400;
+  margin-bottom: 7px;
 }
 
-.CardItem__Content {
+p {
+  font-size: 12px;
+  line-height: 22px;
+}
+
+.ant-tag-default {
+  font-size: 12px;
+  line-height: 22px;
+  color: rgba(0, 0, 0, 0.65);
+  width: 46px;
+  height: 20px;
+  padding-left: 5px;
+}
+
+.CardItem__content {
   padding: 12px 20px 49px;
+}
+
+.CardItem__data {
+  color: #827e7e;
+  margin-bottom: 7px;
+}
+
+.CardItem__description {
+  color: #000000;
 }

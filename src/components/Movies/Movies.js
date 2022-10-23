@@ -1,22 +1,37 @@
 import React, { Component } from 'react';
 
-// import MovieServise from '../../servises/MovieServise';
+import MovieServise from '../../servises/MovieServise';
 import CardList from '../CardList';
 
 class Movies extends Component {
-  // movieRequest = new MovieServise();
+  movieRequest = new MovieServise();
 
   state = {
-    title: 'The way back',
-    date: '05.05.1995',
-    description:
-      'A former basketball all-star, who has lost his wife and family foundation in a struggle with addiction attempts to regain his soul  and salvation by becoming the coach of a disparate ethnically mixed high ...',
-    image: 'https://image.tmdb.org/t/p/original/zldQJ1EhIc7G79cYyXrzQQzUl7a.jpg',
+    movieData: null,
+    imageURL: 'https://image.tmdb.org/t/p/original',
   };
 
+  constructor() {
+    super();
+    this.updateSearchMovies();
+  }
+
+  updateSearchMovies = () => {
+    this.movieRequest.getSearchMovies().then((body) => {
+      this.setState(() => {
+        return {
+          movieData: body,
+        };
+      });
+    });
+  };
+
+  // eslint-disable-next-line consistent-return
   render() {
-    const { title, date, description, image } = this.state;
-    return <CardList title={title} date={date} description={description} image={image} />;
+    const { movieData, imageURL } = this.state;
+    if (movieData) {
+      return <CardList movieData={movieData} imageURL={imageURL} />;
+    }
   }
 }
 
