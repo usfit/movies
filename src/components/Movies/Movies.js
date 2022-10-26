@@ -15,6 +15,7 @@ class Movies extends Component {
     imageURL: 'https://image.tmdb.org/t/p/original',
     loading: true,
     error: false,
+    errorNetwork: false,
   };
 
   constructor() {
@@ -31,7 +32,14 @@ class Movies extends Component {
     });
   };
 
-  onError = () => {
+  onError = (e) => {
+    if (e.message === 'Failed to fetch') {
+      this.setState(() => {
+        return {
+          errorNetwork: true,
+        };
+      });
+    }
     this.setState(() => {
       return {
         loading: false,
@@ -46,10 +54,10 @@ class Movies extends Component {
 
   // eslint-disable-next-line consistent-return
   render() {
-    const { movieData, imageURL, loading, error } = this.state;
+    const { movieData, imageURL, loading, error, errorNetwork } = this.state;
 
     const hasData = !(error || loading);
-    const errorMessage = [error ? <ErrorMessage key={uuidv4()} /> : null];
+    const errorMessage = [error ? <ErrorMessage key={uuidv4()} errorNetwork={errorNetwork} /> : null];
     const spin = [loading ? <Spinner key={uuidv4()} /> : null];
     const content = [
       hasData ? <MoviesView movieData={movieData} imageURL={imageURL} loading={loading} key={uuidv4()} /> : null,
