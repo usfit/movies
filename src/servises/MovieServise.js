@@ -3,16 +3,13 @@ class MovieServise {
 
   key = 'api_key=46de638241c04e3c39b3cee8c2703a3d';
 
-  query = 'return';
-
   page = 1;
 
-  url = `${this.baseUrl}${this.key}&query=${this.query}&page=${this.page}`;
-
-  async getSearchMovies() {
-    const res = await fetch(this.url);
+  async getSearchMovies(query) {
+    const url = `${this.baseUrl}${this.key}&query=${query}&page=${this.page}`;
+    const res = await fetch(url);
     if (!res.ok) {
-      throw new Error(`Ошибка по ${this.url} , статус ${res.status}`);
+      throw new Error(`Ответ в сети был не ок , статус ${res.status}`);
     }
     const body = await res.json();
     return body.results;
