@@ -1,12 +1,14 @@
 import React from 'react';
-import { Row, Col, Spin } from 'antd';
+import { Row, Col, Spin, Pagination } from 'antd';
 import { v4 as uuidv4 } from 'uuid';
-
-import './CardList.css';
 
 import CardItem from '../CardItem';
 
-function CardList({ movieData, imageURL, loading }) {
+import notFound from './notFound.png';
+
+import './CardList.css';
+
+function CardList({ movieData, imageURL, loading, сlickPagination, totalResults, page }) {
   let components = null;
   if (loading) {
     components = (
@@ -16,6 +18,7 @@ function CardList({ movieData, imageURL, loading }) {
     );
   } else {
     components = movieData.map((item) => {
+      const image = [item.backdrop_path ? `${imageURL}${item.backdrop_path}` : notFound];
       return (
         <Col key={uuidv4()}>
           <CardItem
@@ -23,7 +26,7 @@ function CardList({ movieData, imageURL, loading }) {
             title={item.title}
             date={item.release_date}
             description={item.overview}
-            image={`${imageURL}${item.backdrop_path}`}
+            image={image}
           />
         </Col>
       );
@@ -33,6 +36,14 @@ function CardList({ movieData, imageURL, loading }) {
   return (
     <Row className="CardList" gutter={[36, 35]} justify="center">
       {components}
+      <Pagination
+        defaultCurrent={1}
+        total={totalResults}
+        onChange={сlickPagination}
+        showSizeChanger={false}
+        pageSize={20}
+        current={page}
+      />
     </Row>
   );
 }

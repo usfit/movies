@@ -18,6 +18,8 @@ class Movies extends Component {
     error: false,
     errorNetwork: false,
     query: null,
+    page: 1,
+    totalResults: 1,
   };
 
   componentDidMount() {
@@ -25,17 +27,20 @@ class Movies extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { query } = this.state;
-    if (query !== prevState.query) {
+    const { query, page } = this.state;
+    if (query !== prevState.query || page !== prevState.page) {
       this.updateSearchMovies();
     }
   }
 
-  onLoadMovies = (movies) => {
+  onLoadMovies = (result) => {
+    const movies = result.results;
+    const totalResults = result.total_results;
     if (movies.length !== 0) {
       this.setState(() => {
         return {
           movieData: movies,
+          totalResults,
           loading: false,
         };
       });
@@ -66,7 +71,7 @@ class Movies extends Component {
   };
 
   updateSearchMovies = () => {
-    const { query } = this.state;
+    const { query, page } = this.state;
     if (!query) {
       return;
     }
@@ -75,7 +80,7 @@ class Movies extends Component {
         loading: true,
       };
     });
-    this.MovieServise.getSearchMovies(query).then(this.onLoadMovies).catch(this.onError);
+    this.MovieServise.getSearchMovies(query, page).then(this.onLoadMovies).catch(this.onError);
   };
 
   queryValue = (e) => {
@@ -87,17 +92,31 @@ class Movies extends Component {
     });
   };
 
-  // eslint-disable-next-line consistent-return
-  render() {
-    const { movieData, imageURL, loading, error, errorNetwork } = this.state;
+  сlickPagination = (e) => {
+    this.setState(() => {
+      return {
+        page: e,
+      };
+    });
+  };
 
+  render() {
+    const { movieData, imageURL, loading, error, errorNetwork, totalResults, page } = this.state;
     const hasData = !error && !loading;
     const errorMessage = [error ? <ErrorMessage key={uuidv4()} errorNetwork={errorNetwork} /> : null];
     const spin = [loading ? <Spinner key={uuidv4()} /> : null];
     const noneContent = [hasData && !movieData ? <h1 key={uuidv4()}>По вашему запросу ничего не найдено</h1> : null];
     const content = [
       hasData && movieData ? (
-        <MoviesView imageURL={imageURL} loading={loading} movieData={movieData} key={uuidv4()} />
+        <MoviesView
+          imageURL={imageURL}
+          loading={loading}
+          movieData={movieData}
+          key={uuidv4()}
+          totalResults={totalResults}
+          сlickPagination={(e) => this.сlickPagination(e)}
+          page={page}
+        />
       ) : null,
     ];
 

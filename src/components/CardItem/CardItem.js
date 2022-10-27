@@ -17,6 +17,14 @@ function shotText(description) {
   return description;
 }
 
+function formatData(data) {
+  try {
+    return format(new Date(data), 'PP');
+  } catch (err) {
+    return 'No data';
+  }
+}
+
 function CardItem({ title, date, description, image }) {
   shotText(description);
   return (
@@ -28,7 +36,7 @@ function CardItem({ title, date, description, image }) {
         <Layout className="CardItem__content">
           <div className="CardItem__header">
             <Title>{`${title}`}</Title>
-            <p className="CardItem__data">{format(new Date(date), 'PP')}</p>
+            <p className="CardItem__data">{formatData(date)}</p>
             <div>
               <Tag color="default">Action</Tag>
               <Tag color="default">Drama</Tag>
