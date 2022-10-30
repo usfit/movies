@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { Tabs } from 'antd';
 
 import MovieServise from '../../servises/MovieServise';
 import SearchPanel from '../SearchPanel';
+import { Provider } from '../ServiceContext';
 
 import Spinner from './Spinner';
 import ErrorMessage from './ErrorMessage';
 import MoviesView from './MoviesView';
+
+import './Movies.css';
 
 class Movies extends Component {
   MovieServise = new MovieServise();
@@ -20,10 +24,12 @@ class Movies extends Component {
     query: null,
     page: 1,
     totalResults: 1,
+    genreList: [],
   };
 
   componentDidMount() {
     this.updateSearchMovies();
+    this.loadGenreList();
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -83,6 +89,19 @@ class Movies extends Component {
     this.MovieServise.getSearchMovies(query, page).then(this.onLoadMovies).catch(this.onError);
   };
 
+  getGenreList = (result) => {
+    const genreList = Array.from(result.genres);
+    this.setState(() => {
+      return {
+        genreList,
+      };
+    });
+  };
+
+  loadGenreList = () => {
+    this.MovieServise.loadGenreList().then(this.getGenreList).catch(this.onError);
+  };
+
   queryValue = (e) => {
     const newQuery = e.target.value;
     this.setState(() => {
@@ -101,7 +120,7 @@ class Movies extends Component {
   };
 
   render() {
-    const { movieData, imageURL, loading, error, errorNetwork, totalResults, page } = this.state;
+    const { movieData, imageURL, loading, error, errorNetwork, totalResults, page, genreList } = this.state;
     const hasData = !error && !loading;
     const errorMessage = [error ? <ErrorMessage key={uuidv4()} errorNetwork={errorNetwork} /> : null];
     const spin = [loading ? <Spinner key={uuidv4()} /> : null];
@@ -120,16 +139,27 @@ class Movies extends Component {
       ) : null,
     ];
 
+    const tabsItems = [
+      {
+        label: 'Search',
+        key: 'item-1',
+        children: (
+          <>
+            <SearchPanel queryValue={(e) => this.queryValue(e)} />
+            {errorMessage}
+            {spin}
+            {noneContent}
+            {content}
+          </>
+        ),
+      },
+      { label: 'Rated', key: 'item-2', children: <h1>Заглушка</h1> },
+    ];
+
     return (
-      <>
-        <SearchPanel queryValue={(e) => this.queryValue(e)} />
-        <div className="Movies">
-          {errorMessage}
-          {spin}
-          {noneContent}
-          {content}
-        </div>
-      </>
+      <Provider value={genreList}>
+        <Tabs centered defaultActiveKey="1" items={tabsItems} className="Movies" />
+      </Provider>
     );
   }
 }

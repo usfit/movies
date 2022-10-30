@@ -8,6 +8,12 @@ import notFound from './notFound.png';
 
 import './CardList.css';
 
+const setRating = (e, item) => {
+  item.rated = e;
+  const movie = JSON.stringify(item);
+  localStorage.setItem(item.id, movie);
+};
+
 function CardList({ movieData, imageURL, loading, сlickPagination, totalResults, page }) {
   let components = null;
   if (loading) {
@@ -27,6 +33,10 @@ function CardList({ movieData, imageURL, loading, сlickPagination, totalResults
             date={item.release_date}
             description={item.overview}
             image={image}
+            genre={item.genre_ids}
+            average={item.vote_average}
+            idx={item.id}
+            setRating={(e) => setRating(e, item)}
           />
         </Col>
       );
