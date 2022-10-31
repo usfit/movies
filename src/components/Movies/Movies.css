@@ -4,3 +4,15 @@
   justify-content: center;
   min-height: 300px;
 }
+
+.ant-tabs-content-holder {
+  text-align: center;
+}
+
+.ant-spin {
+  padding-top: 50px;
+}
+
+.ant-tabs-content-holder h1 {
+  padding-top: 20px;
+}

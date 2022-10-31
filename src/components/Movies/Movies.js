@@ -4,11 +4,12 @@ import { Tabs } from 'antd';
 
 import MovieServise from '../../servises/MovieServise';
 import SearchPanel from '../SearchPanel';
-import { Provider } from '../ServiceContext';
+import { Provider } from '../ServiceContext/ServiceContext';
 
 import Spinner from './Spinner';
 import ErrorMessage from './ErrorMessage';
 import MoviesView from './MoviesView';
+import MoviesViewRated from './MoviesViewRated';
 
 import './Movies.css';
 
@@ -25,6 +26,8 @@ class Movies extends Component {
     page: 1,
     totalResults: 1,
     genreList: [],
+    // eslint-disable-next-line react/no-unused-state
+    statusSearch: true,
   };
 
   componentDidMount() {
@@ -119,6 +122,14 @@ class Movies extends Component {
     });
   };
 
+  changeStatusSearch = () => {
+    this.setState(({ statusChange }) => {
+      return {
+        statusChange: !statusChange,
+      };
+    });
+  };
+
   render() {
     const { movieData, imageURL, loading, error, errorNetwork, totalResults, page, genreList } = this.state;
     const hasData = !error && !loading;
@@ -153,12 +164,12 @@ class Movies extends Component {
           </>
         ),
       },
-      { label: 'Rated', key: 'item-2', children: <h1>Заглушка</h1> },
+      { label: 'Rated', key: 'item-2', children: <MoviesViewRated imageURL={imageURL} /> },
     ];
 
     return (
       <Provider value={genreList}>
-        <Tabs centered defaultActiveKey="1" items={tabsItems} className="Movies" />
+        <Tabs centered defaultActiveKey="1" items={tabsItems} className="Movies" onChange={this.changeStatusSearch} />
       </Provider>
     );
   }

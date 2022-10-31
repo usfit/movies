@@ -22,7 +22,9 @@ const debouncedFn = debounce(searchValue, 800);
 function SearchPanel({ queryValue }) {
   return (
     <div className="SearchPanel">
-      <Input className="SearchPanel" placeholder="Type to search..." onChange={(e) => debouncedFn(e, queryValue)} />
+      <form>
+        <Input placeholder="Type to search..." onChange={(e) => debouncedFn(e, queryValue)} />
+      </form>
     </div>
   );
 }

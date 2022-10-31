@@ -3,7 +3,7 @@ import { Card, Image, Layout, Typography, Rate } from 'antd';
 import { format } from 'date-fns';
 
 import './CardItem.css';
-import { Consumer } from '../ServiceContext';
+import { Consumer } from '../ServiceContext/ServiceContext';
 
 import GenreList from './GenreList';
 

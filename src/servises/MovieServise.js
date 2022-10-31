@@ -17,7 +17,7 @@ class MovieServise {
     const url = `https://api.themoviedb.org/3/genre/movie/list?${this.key}&language=en-US`;
     const res = await fetch(url);
     if (!res.ok) {
-      throw new Error(`Ну удалось получить список жанров , статус ${res.status}`);
+      throw new Error(`Не удалось получить список жанров , статус ${res.status}`);
     }
     const body = await res.json();
     return body;

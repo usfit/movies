@@ -1,4 +1,8 @@
 .CardList {
-  max-width: 1110px;
-  padding: 34px 40px 70px 40px;
+  max-width: 980px;
+  padding: 34px 0 40px 0;
+}
+
+.CardList__Pagination {
+  padding-bottom: 18px;
 }

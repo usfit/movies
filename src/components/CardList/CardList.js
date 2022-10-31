@@ -44,17 +44,21 @@ function CardList({ movieData, imageURL, loading, сlickPagination, totalResults
   }
 
   return (
-    <Row className="CardList" gutter={[36, 35]} justify="center">
-      {components}
-      <Pagination
-        defaultCurrent={1}
-        total={totalResults}
-        onChange={сlickPagination}
-        showSizeChanger={false}
-        pageSize={20}
-        current={page}
-      />
-    </Row>
+    <>
+      <Row className="CardList" gutter={[36, 35]} justify="center">
+        {components}
+      </Row>
+      <Row className="CardList__Pagination" justify="center">
+        <Pagination
+          defaultCurrent={1}
+          total={totalResults}
+          onChange={сlickPagination}
+          showSizeChanger={false}
+          pageSize={20}
+          current={page}
+        />
+      </Row>
+    </>
   );
 }
 
